@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   // Handle preflight OPTIONS request
   if (req.method === "OPTIONS") {
     return res.sendStatus(200);
-  }
+  };
 
   next();
 });
