@@ -10,24 +10,29 @@ dotenv.config();
 
 mongoDB()
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", `${process.env.FRONT_DOMAIN}`);
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS,PATCH"
-  );
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", `${process.env.FRONT_DOMAIN}`);
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, PUT, DELETE, OPTIONS,PATCH"
+//   );
 
-  // Handle preflight OPTIONS request
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
-  };
+//   // Handle preflight OPTIONS request
+//   if (req.method === "OPTIONS") {
+//     return res.sendStatus(200);
+//   };
 
-  next();
-});
+//   next();
+// });
+app.use(cors({
+  origin: process.env.FRONT_DOMAIN, // e.g., 'https://gomoto-live.vercel.app'
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  credentials: true
+}));
 
 
 app.get("/",(req,res)=>{
